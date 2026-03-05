@@ -1,110 +1,47 @@
-# Spline Motion Warping
+# Spline Motion Warping: Quick Setup Guide
 
-A code plugin for Unreal Engine that adds spline-based root motion warping. Characters follow a `USplineComponent` path during a motion warp window, using the same Motion Warping notify you already know.
+Spline Motion Warping is a UE 5.6+ plugin that allows characters to follow a `USplineComponent` path during a motion warp window. This guide covers the installation and setup required to get your characters moving along custom paths.
 
-## Requirements
+## Requirements & Installation
 
-- Unreal Engine 5.6+
-- **Motion Warping** plugin (built-in, must be enabled)
+- **Engine Version:** Unreal Engine 5.6 or higher.
+- **Dependencies:** The built-in **MotionWarping** engine plugin must be enabled.
+- **Installation:** Copy the `SplineMotionWarping` folder into your project's `Plugins/` directory and rebuild.
 
-## Installation
+## Quick Setup
 
-1. Copy the `SplineMotionWarping` folder into your project's `Plugins/` directory.
-2. Enable the **Motion Warping** plugin in your project if it isn't already.
-3. Rebuild your project.
+Follow these steps to implement spline-based movement:
 
-## Quick Start
+### 1. Prepare the Character and Spline
 
-### 1. Montage Setup
+- Add a `UMotionWarpingComponent` to your character blueprint.
+- Place a `USplineComponent` in your level.
 
-Add an **Anim Notify State — Motion Warping** to your montage (the same notify you use for regular warps). In its details panel:
+> **Pro-Tip:** Ensure the Spline Component is not a child of the actor performing the motion warp. If the spline is attached to the character, the path will move along with the warping, leading to unpredictable results. It is best to use a detached spline or a standalone Spline Actor.
 
-- Set **Root Motion Modifier** to **Spline Warp**
-- Set **Warp Target Name** to match your target name (e.g. `Roll`)
+### 2. Register the Warp Target
 
-![Montage setup](images/montage-setup.png)
+Use the **Add or Update Warp Target** node in Blueprints:
 
-### 2. Blueprint Setup
+- **Name:** Set a unique name (e.g., `Roll`).
+- **Component:** Plug your Spline Component reference directly into the Component parameter.
 
-Wire a spline component into a warp target using the standard **Add or Update Warp Target** node:
+### 3. Configure the Animation Montage
 
-1. Get a reference to your **Spline Actor** and its **Spline Component**
-2. Create a **Make Motion Warping Target** node
-3. Plug the Spline Component into the **Component** pin
-4. Set the **Name** to match your montage's Warp Target Name
-5. Pass the target to **Add or Update Warp Target** on the Motion Warping Component
+In your Animation Montage, add an **Anim Notify State — Motion Warping**:
 
-![Blueprint setup](images/blueprint-setup.png)
+- **Warp Target Name:** Match the name used in Step 2.
+- **Root Motion Modifier:** Select **Spline Warp** from the dropdown menu.
+- **Rotation Mode:** Choose how the character faces, such as `FaceSplineTangent`.
 
-That's it. Play the montage and the character follows the spline.
+## Key Features
 
-## Configuration
-
-All settings are exposed on the Motion Warping notify in the montage editor.
-
-### Spline Rotation Mode
-
-| Mode | Description |
-|------|-------------|
-| **Face Spline Tangent** | Character faces the movement direction along the spline (default) |
-| **Face Target** | Character faces the spline endpoint throughout traversal |
-| **Locked** | Rotation locks to the character's orientation when the warp began |
-| **Use Warp Rotation** | Falls back to the inherited warp rotation logic |
-
-All modes support a **Z-Axis Only** toggle that constrains rotation to yaw (no pitch/roll).
-
-### Blend In Ratio
-
-Controls how much of the warp duration is spent easing from raw root motion onto the spline path. Prevents teleporting to the spline start when the character isn't already standing on it.
-
-- `0.0` — Snap to spline immediately (default)
-- `0.1` — First 10% of the warp duration smoothly blends onto the spline
-
-Uses smooth-step interpolation for natural acceleration.
-
-### Warp Rotation Time Multiplier
-
-Controls how quickly rotation reaches its target. Works with Face Spline Tangent, Face Target, and Use Warp Rotation modes.
-
-- `1.0` — Rotation spreads evenly across the remaining window (default)
-- `0.5` — Rotation completes in half the time, snapping earlier
-
-### Inherited Properties
-
-The modifier inherits from `URootMotionModifier_Warp`. These inherited properties are actively used:
-
-- **Warp Translation** — Enable/disable position warping along the spline
-- **Ignore Z Axis** — Prevents vertical warping (preserves raw root motion Z)
-- **Warp Rotation** — Enable/disable rotation warping
-- **Warp Rotation Time Multiplier** — See above
-
-Other inherited properties (Rotation Type, Rotation Method, Warp Point Anim Provider, etc.) are unused during spline traversal and can be ignored.
-
-## Debug Visualization
-
-Enable **Draw Debug** on the modifier to see:
-
-- Spline path colored by progress (green = traversed, cyan = ahead)
-- Start/end markers (green/red spheres)
-- Current desired position on the spline (yellow sphere)
-- Line from character to desired position (orange)
-- Coordinate system at the spline endpoint
-- Progress percentage text above the character
-
-## Blueprint Factory (C++)
-
-For programmatic setup without montage notifies:
-
-```cpp
-URootMotionModifier_SplineWarp::AddRootMotionModifierSplineWarp(
-    MotionWarpingComp,
-    Animation,
-    StartTime,
-    EndTime,
-    WarpTargetName,
-    ESplineWarpRotationMode::FaceSplineTangent, // optional
-    0.f);                                        // BlendInRatio, optional
-```
+| Feature | Description |
+|---------|-------------|
+| **Rotation Modes** | Supports `FaceSplineTangent`, `FaceTarget`, `Locked`, and `UseWarpRotation`. |
+| **Blend In Ratio** | (0.0 -- 1.0) Controls the time spent easing from raw root motion onto the spline path. |
+| **Debug Visuals** | Enable `bDrawDebug` to see the path progress, start/end markers, and current desired position. |
+| **Z-Axis Only** | A toggle to constrain all warping rotations strictly to the Yaw axis. |
 
 ## Support
 
