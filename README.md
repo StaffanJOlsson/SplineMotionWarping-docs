@@ -68,30 +68,31 @@ That guide covers:
 
 Once you have a working Motion Warping setup (even a simple Skew Warp to a target point), you are ready to swap in a spline path. The following steps show what is **different** for Spline Warp.
 
-### Step 2 -- Place a Spline in the Level
+### Step 2 -- Create a Spline Actor
 
-The spline defines the curved path the character will follow during the warp.
+The spline defines the curved path the character will follow during the warp. The recommended approach is to create a **Blueprint Actor** with a pre-designed Spline Component, then **spawn it at runtime** with the desired transform.
 
-1. In the **Place Actors** panel, search for **Spline** (or create an Actor with a Spline Component).
-2. Place the spline actor in your level.
-3. Select the spline and adjust its control points in the viewport to shape the desired path.
+1. Create a new **Actor Blueprint** (e.g., `BP_WarpSpline`).
+2. Add a **Spline Component** as the root or a child component.
+3. Shape the spline's control points in the Blueprint editor to define the path (e.g., a curve, an arc, an S-bend).
+4. At runtime, **Spawn Actor from Class** using your spline actor Blueprint. Set the spawn transform relative to the character or world position so the path starts and ends where you need it.
 
-![Spline placed in level with control points visible](images/spline-in-level.png)
+![Spline actor Blueprint with shaped spline path](images/spline-in-level.png)
 
-> **Important:** The spline must **not** be a child of the character performing the warp. If the spline moves with the character, the path shifts during traversal and produces erratic results. Always use a standalone spline actor in the world.
+> **Important:** The spline must **not** be a child of the character performing the warp. If the spline moves with the character, the path shifts during traversal and produces erratic results. Always spawn it as a standalone actor in the world.
 
 ### Step 3 -- Register the Spline as a Warp Target
 
 This is the key difference from standard Motion Warping. Instead of passing a target **transform** (location/rotation), you pass the **Spline Component** itself:
 
-1. In your character's Blueprint, get a reference to the **Motion Warping Component**.
-2. Call **Add or Update Warp Target from Component**.
+1. After spawning the spline actor, get a reference to its **Spline Component**.
+2. On the character's **Motion Warping Component**, call **Add or Update Warp Target from Component**.
 3. Set **Name** to a unique identifier (e.g., `SplinePath`). This must match the notify in Step 4.
-4. Connect your **Spline Component** reference to the **Component** pin.
+4. Connect the spawned actor's **Spline Component** reference to the **Component** pin.
 
 ![Add or Update Warp Target from Component node with Spline Component connected](images/register-warp-target.png)
 
-> Register the warp target **before** the montage reaches the warp notify window. A common pattern is to call this immediately before `Play Montage`.
+> Register the warp target **before** the montage reaches the warp notify window. A common pattern is to spawn the spline actor and register the target immediately before calling `Play Montage`.
 
 ### Step 4 -- Select Spline Warp in the Montage
 
