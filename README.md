@@ -72,11 +72,18 @@ Once you have a working Motion Warping setup (even a simple Skew Warp to a targe
 The spline defines the curved path the character will follow during the warp. The recommended approach is to create a **Blueprint Actor** with a pre-designed Spline Component, then **spawn it at runtime** with the desired transform.
 
 1. Create a new **Actor Blueprint** (e.g., `BP_WarpSpline`).
-2. Add a **Spline Component** as the root or a child component.
-3. Shape the spline's control points in the Blueprint editor to define the path (e.g., a curve, an arc, an S-bend).
-4. At runtime, **Spawn Actor from Class** using your spline actor Blueprint. Set the spawn transform relative to the character or world position so the path starts and ends where you need it.
 
-![Spline actor Blueprint with shaped spline path](images/spline-in-level.png)
+![Right-click to create a new Actor Blueprint](images/create-actor.png)
+
+2. Add a **Spline Component** as the root or a child component.
+
+![Add a Spline Component to the actor](images/add-spline-component.png)
+
+3. Shape the spline's control points in the Blueprint editor to define the path (e.g., a curve, an arc, an S-bend).
+
+![Modify spline control points to shape the path](images/shape-spline.png)
+
+4. At runtime, **Spawn Actor from Class** using your spline actor Blueprint. Set the spawn transform relative to the character or world position so the path starts and ends where you need it.
 
 > **Important:** The spline must **not** be a child of the character performing the warp. If the spline moves with the character, the path shifts during traversal and produces erratic results. Always spawn it as a standalone actor in the world.
 
