@@ -4,7 +4,7 @@
 
 Use it for traversal abilities (rolls along curved paths, dashes around corners), cinematic movement (characters following scripted paths), or any gameplay where linear warping is too rigid.
 
-🛒 [Get it on Fab](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738) | 🎬 [Tutorial](https://youtu.be/5JiHij93gV4)
+🛒 [Get it on Fab](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738) | 🎬 [Tutorial](https://youtu.be/5JiHij93gV4) | 📦 [Demo Project](https://github.com/StaffanJOlsson/SplineMWDemo)
 
 ---
 
