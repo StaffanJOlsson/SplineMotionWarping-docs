@@ -106,7 +106,7 @@ You will also see the Spline Warp-specific properties described in the next sect
 At runtime, the full flow is: **Spawn** the spline actor → **Make** a warp target from its Spline Component → **Register** it on the Motion Warping Component → **Play** the montage. This is the key difference from standard Motion Warping — instead of passing a target transform, you pass the **Spline Component** itself.
 
 1. **Spawn Actor from Class** — Spawn your spline actor Blueprint (from Step 2). Set the spawn transform relative to the character so the path starts and ends where you need it.
-2. **Make Motion Warp Target from Component** — Get the spawned actor's **Spline Component** and create a warp target. Set the **Name** to match the notify from Step 3 (e.g., `SplinePath`).
+2. **Make Motion Warp Target from Component** — Get the spawned actor's **Spline Component** and create a warp target. The **Name** must be exactly the same as the **Warp Target Name** set on the notify in Step 3 (e.g., `SplinePath`). If these names don't match, the warp will not activate.
 3. **Add or Update Warp Target** — Pass the warp target to the character's **Motion Warping Component**.
 4. **Play Montage** — Trigger the montage. When playback reaches the warp window, the character follows the spline path instead of warping in a straight line.
 
