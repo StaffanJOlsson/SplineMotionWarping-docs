@@ -43,8 +43,8 @@ Use it for traversal abilities (rolls along curved paths, dashes around corners)
 
 1. Download the plugin zip for your engine version.
 2. Extract the `SplineMotionWarping` folder into your project's `Plugins/` directory, so the path is: `YourProject/Plugins/SplineMotionWarping/SplineMotionWarping.uplugin`
-3. Open your project. The plugin will compile automatically.
-4. Verify it appears under **Edit > Plugins** (search for "Spline Motion Warping").
+3. Build the project from source (right-click the `.uproject` → Generate Visual Studio project files, then Build in VS or use UnrealBuildTool).
+4. Under **Edit > Plugins**, search for "Motion Warping" and verify both **Motion Warping** and **Spline Motion Warping** are enabled.
 
 ![Plugin enabled in the Plugins window](images/plugins-window.png)
 
