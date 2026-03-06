@@ -92,9 +92,12 @@ The spline defines the curved path the character will follow during the warp. Th
 3. Position the notify window to cover the section of the animation where the character should follow the spline.
 4. Select the notify state and look at the **Details** panel.
 5. Set **Root Motion Modifier** to **Spline Warp** (instead of Skew Warp or Scale).
+
+![Switching Root Motion Modifier to Spline Warp](images/select-spline-warp.png)
+
 6. Set **Warp Target Name** to a unique identifier (e.g., `SplinePath`). This must match the name used in Step 4.
 
-![Montage Details panel showing Spline Warp selected as Root Motion Modifier](images/montage-spline-warp.png)
+![Setting the Warp Target Name](images/set-warp-target-name.png)
 
 You will also see the Spline Warp-specific properties described in the next section.
 
