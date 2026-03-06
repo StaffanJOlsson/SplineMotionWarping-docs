@@ -34,7 +34,7 @@ Use it for traversal abilities (rolls along curved paths, dashes around corners)
 |---|---|
 | **Engine Version** | Unreal Engine 5.6 or higher |
 | **Engine Plugin** | **MotionWarping** must be enabled (ships with UE) |
-| **Root Motion** | Your animation must have root motion data |
+| **Root Motion** | Your animation must have **Enable Root Motion** enabled |
 | **Platforms** | Win64, Mac, Linux |
 
 ---
