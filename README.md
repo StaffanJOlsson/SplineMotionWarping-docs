@@ -220,7 +220,7 @@ For advanced or procedural setups, you can add a Spline Warp modifier directly f
 
 A standalone example project is available that demonstrates a complete working setup using the Third Person template:
 
-> **[Download Example Project](https://github.com/StaffanJOlsson/SplineMotionWarping-Example)**
+> **[Download Example Project](https://github.com/StaffanJOlsson/SplineMWDemo)**
 
 The example includes:
 - A character with a Motion Warping Component
@@ -235,7 +235,7 @@ The example includes:
 
 See the plugin in action:
 
-> **[Spline Motion Warping -- Demo Video]()**
+> **[Spline Motion Warping Tutorial](https://youtu.be/5JiHij93gV4)**
 
 The video covers setup, different rotation modes, blend-in behavior, and debug visualization.
 
@@ -258,4 +258,4 @@ The video covers setup, different rotation modes, blend-in behavior, and debug v
 ## Support
 
 - [Documentation](https://github.com/StaffanJOlsson/SplineMotionWarping-docs)
-- [Fab Store Page](https://www.fab.com/sellers/Staffan%20Olsson)
+- [Fab Store Page](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738)
