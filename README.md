@@ -112,7 +112,7 @@ At runtime, the full flow is: **Spawn** the spline actor → **Make** a warp tar
 
 ![Spawn → Make Warp Target → Add/Update → Play Montage Blueprint flow](images/register-warp-target.png)
 
-![Character following a curved spline path during a roll animation](images/spline-warp-result.png)
+When playback reaches the warp window, the character will follow the spline path instead of warping in a straight line.
 
 ---
 
