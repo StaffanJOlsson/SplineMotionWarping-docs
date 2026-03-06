@@ -83,8 +83,6 @@ The spline defines the curved path the character will follow during the warp. Th
 
 ![Modify spline control points to shape the path](images/shape-spline.png)
 
-4. At runtime, **Spawn Actor from Class** using your spline actor Blueprint. Set the spawn transform relative to the character or world position so the path starts and ends where you need it.
-
 > **Important:** The spline must **not** be a child of the character performing the warp. If the spline moves with the character, the path shifts during traversal and produces erratic results. Always spawn it as a standalone actor in the world.
 
 ### Step 3 -- Select Spline Warp in the Montage
