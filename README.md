@@ -14,10 +14,9 @@ Use it for traversal abilities (rolls along curved paths, dashes around corners)
 - [Installation](#installation)
 - [Setup Guide](#setup-guide)
   - [Step 1 -- Motion Warping Basics](#step-1----motion-warping-basics)
-  - [Step 2 -- Place a Spline in the Level](#step-2----place-a-spline-in-the-level)
-  - [Step 3 -- Register the Spline as a Warp Target](#step-3----register-the-spline-as-a-warp-target)
-  - [Step 4 -- Select Spline Warp in the Montage](#step-4----select-spline-warp-in-the-montage)
-  - [Step 5 -- Play the Montage](#step-5----play-the-montage)
+  - [Step 2 -- Create a Spline Actor](#step-2----create-a-spline-actor)
+  - [Step 3 -- Select Spline Warp in the Montage](#step-3----select-spline-warp-in-the-montage)
+  - [Step 4 -- Spawn, Register, and Play](#step-4----spawn-register-and-play)
 - [Spline Warp Properties](#spline-warp-properties)
 - [Rotation Modes](#rotation-modes)
 - [Blend In](#blend-in)
@@ -81,35 +80,29 @@ The spline defines the curved path the character will follow during the warp. Th
 
 > **Important:** The spline must **not** be a child of the character performing the warp. If the spline moves with the character, the path shifts during traversal and produces erratic results. Always spawn it as a standalone actor in the world.
 
-### Step 3 -- Register the Spline as a Warp Target
-
-This is the key difference from standard Motion Warping. Instead of passing a target **transform** (location/rotation), you pass the **Spline Component** itself:
-
-1. After spawning the spline actor, get a reference to its **Spline Component**.
-2. On the character's **Motion Warping Component**, call **Add or Update Warp Target from Component**.
-3. Set **Name** to a unique identifier (e.g., `SplinePath`). This must match the notify in Step 4.
-4. Connect the spawned actor's **Spline Component** reference to the **Component** pin.
-
-![Add or Update Warp Target from Component node with Spline Component connected](images/register-warp-target.png)
-
-> Register the warp target **before** the montage reaches the warp notify window. A common pattern is to spawn the spline actor and register the target immediately before calling `Play Montage`.
-
-### Step 4 -- Select Spline Warp in the Montage
+### Step 3 -- Select Spline Warp in the Montage
 
 1. Open your **Animation Montage**.
 2. If you don't already have one, add a **Motion Warping** notify state on the Notifies track (right-click > Add Notify State > Motion Warping).
 3. Position the notify window to cover the section of the animation where the character should follow the spline.
 4. Select the notify state and look at the **Details** panel.
 5. Set **Root Motion Modifier** to **Spline Warp** (instead of Skew Warp or Scale).
-6. Set **Warp Target Name** to the same name used in Step 3 (e.g., `SplinePath`).
+6. Set **Warp Target Name** to a unique identifier (e.g., `SplinePath`). This must match the name used in Step 4.
 
 ![Montage Details panel showing Spline Warp selected as Root Motion Modifier](images/montage-spline-warp.png)
 
 You will also see the Spline Warp-specific properties described in the next section.
 
-### Step 5 -- Play the Montage
+### Step 4 -- Spawn, Register, and Play
 
-Trigger the montage as you normally would (e.g., via `Play Montage` or through the Gameplay Ability System). When playback reaches the warp window, the character will follow the spline path instead of warping in a straight line.
+At runtime, the full flow is: **Spawn** the spline actor → **Make** a warp target from its Spline Component → **Register** it on the Motion Warping Component → **Play** the montage. This is the key difference from standard Motion Warping — instead of passing a target transform, you pass the **Spline Component** itself.
+
+1. **Spawn Actor from Class** — Spawn your spline actor Blueprint (from Step 2). Set the spawn transform relative to the character so the path starts and ends where you need it.
+2. **Make Motion Warp Target from Component** — Get the spawned actor's **Spline Component** and create a warp target. Set the **Name** to match the notify from Step 3 (e.g., `SplinePath`).
+3. **Add or Update Warp Target** — Pass the warp target to the character's **Motion Warping Component**.
+4. **Play Montage** — Trigger the montage. When playback reaches the warp window, the character follows the spline path instead of warping in a straight line.
+
+![Spawn → Make Warp Target → Add/Update → Play Montage Blueprint flow](images/register-warp-target.png)
 
 ![Character following a curved spline path during a roll animation](images/spline-warp-result.png)
 
