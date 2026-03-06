@@ -4,6 +4,8 @@
 
 Use it for traversal abilities (rolls along curved paths, dashes around corners), cinematic movement (characters following scripted paths), or any gameplay where linear warping is too rigid.
 
+🛒 [Get it on Fab](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738) | 🎬 [Tutorial](https://youtu.be/5JiHij93gV4)
+
 ---
 
 ## Table of Contents
@@ -257,5 +259,4 @@ The video covers setup, different rotation modes, blend-in behavior, and debug v
 
 ## Support
 
-- [Documentation](https://github.com/StaffanJOlsson/SplineMotionWarping-docs)
 - [Fab Store Page](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738)
