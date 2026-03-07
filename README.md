@@ -258,7 +258,3 @@ The video covers setup, different rotation modes, blend-in behavior, and debug v
 | **Debug lines don't appear** | Draw Debug only works in Development/Debug builds. Also check the console variable `MotionWarping.Debug`. |
 
 ---
-
-## Support
-
-- [Fab Store Page](https://www.fab.com/portal/listings/13abea64-26ff-4e61-b731-0b389d2e5738)
